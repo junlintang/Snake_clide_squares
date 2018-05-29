@@ -1,4 +1,4 @@
 
-public enum Direction {  //·½ÏòÎªÃ¶¾ÙÀà
+public enum Direction {  //æ–¹å‘å–å€¼èŒƒå›´
 	L, U,  R,  D,  STOP
 }
