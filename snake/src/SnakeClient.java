@@ -8,9 +8,9 @@ import javax.swing.JOptionPane;
 
 
 public class SnakeClient extends Frame implements ActionListener {
-	public static final int Fram_width = 500; // ¾²Ì¬È«¾Ö´°¿Ú´óĞ¡
+	public static final int Fram_width = 500; // é™æ€å…¨å±€çª—å£å¤§å°
 	public static final int Fram_length = 800; 
-	public static boolean printable = true;//ÊÇ·ñË¢ĞÂ»­°åµÄ±êÖ¾Á¿
+	public static boolean printable = true;//æ˜¯å¦åˆ·æ–°ç”»æ¿çš„æ ‡å¿—é‡
 	public static int time = 0; 
 	MenuBar jmb = null;
 	Menu jm1 = null, jm2 = null, jm3 = null, jm4 = null;
@@ -20,7 +20,7 @@ public class SnakeClient extends Frame implements ActionListener {
 	Image screenImage = null;
 	Random rand =new Random(25);
 	List<barrier> bs = new ArrayList<barrier>();
-	public void update(Graphics g) {                 //²»¶ÏÖ´ĞĞupdateº¯ÊıÀ´ÈÃ¶ÔÏó¶¯ÆğÀ´
+	public void update(Graphics g) {                 //ä¸æ–­æ‰§è¡Œupdateå‡½æ•°æ¥è®©å¯¹è±¡åŠ¨èµ·æ¥
 
 		screenImage = this.createImage(Fram_width, Fram_length);
 
@@ -33,10 +33,10 @@ public class SnakeClient extends Frame implements ActionListener {
 		g.drawImage(screenImage, 0, 0, null);
 	}
 	
-	public void framPaint(Graphics g) {             //updateÄÚµÄº¯Êı£¬Ö´ĞĞupdateÊ±Ò²ÒªÖ´ĞĞ
+	public void framPaint(Graphics g) {             //updateå†…çš„å‡½æ•°ï¼Œæ‰§è¡Œupdateæ—¶ä¹Ÿè¦æ‰§è¡Œ
 		time +=1;
 		if(homeSnake.isLive()){
-			//µ¥Î»Ê±¼ä¶Ô100È¡ÓàµÈÓÚ0Ôò½¨Á¢5¸öÒ»ÅÅµÄÕÏ°­Îï£¬¶Ô100È¡ÓàµÈÓÚ50Ôò½¨Á¢²»¶àÓÚ3¸öÒ»ÅÅµÄÕÏ°­Îï
+			//å•ä½æ—¶é—´å¯¹100å–ä½™ç­‰äº0åˆ™å»ºç«‹5ä¸ªä¸€æ’çš„éšœç¢ç‰©ï¼Œå¯¹100å–ä½™ç­‰äº50åˆ™å»ºç«‹ä¸å¤šäº3ä¸ªä¸€æ’çš„éšœç¢ç‰©
 			if(time%100==0){
 				for(int i=0;i<5;i++){
 					bs.add(new barrier(100*i,50, rand.nextInt(5),this));
@@ -48,13 +48,13 @@ public class SnakeClient extends Frame implements ActionListener {
 					pos[i] = rand.nextInt(5);
 					for(int j=0;j<i;j++){
 						if(pos[i]==pos[j]) pos[i]=-1;
-					}
+					}//ä¸ºäº†ä½¿å¾—æ•°é‡å¯èƒ½ä¸º3ä¸ªä»¥ä¸‹
 					if(pos[i]>=0)
 					bs.add(new barrier(100*pos[i],50,rand.nextInt(100),this));
 				}
 			}
 			
-			//»­³öËùÓĞµÄÕÏ°­Îï¼°Éß
+			//ç”»å‡ºæ‰€æœ‰çš„éšœç¢ç‰©åŠè›‡
 //			System.out.println("----------------------------------------");
 			System.out.println(bs.size());
 			for(int i=0;i<bs.size();i++){
@@ -74,7 +74,7 @@ public class SnakeClient extends Frame implements ActionListener {
 			int x = homeSnake.getX();
 			int y = homeSnake.getY();
 			
-			//¼ì²éËùÓĞµÄÕÏ°­ÎïºÍÉßÊÇ·ñÏà×²
+			//æ£€æŸ¥æ‰€æœ‰çš„éšœç¢ç‰©å’Œè›‡æ˜¯å¦ç›¸æ’
 			for(int i=0;i<bs.size();i++){
 				barrier xi = bs.get(i);
 				if(x>=xi.x&&x<xi.x+100&&y<=xi.y+100&&y>xi.y){
@@ -90,26 +90,26 @@ public class SnakeClient extends Frame implements ActionListener {
 	
 	public SnakeClient() {
 		// printable = false;
-		// ´´½¨²Ëµ¥¼°²Ëµ¥Ñ¡Ïî
+		// åˆ›å»ºèœå•åŠèœå•é€‰é¡¹
 		jmb = new MenuBar();
-		jm1 = new Menu("ÓÎÏ·");
-		jm2 = new Menu("ÔİÍ£/¼ÌĞø");
-		jm3 = new Menu("°ïÖú");
-		jm4 = new Menu("ÓÎÏ·¼¶±ğ");
-		jm1.setFont(new Font("TimesRoman", Font.BOLD, 15));// ÉèÖÃ²Ëµ¥ÏÔÊ¾µÄ×ÖÌå
-		jm2.setFont(new Font("TimesRoman", Font.BOLD, 15));// ÉèÖÃ²Ëµ¥ÏÔÊ¾µÄ×ÖÌå
-		jm3.setFont(new Font("TimesRoman", Font.BOLD, 15));// ÉèÖÃ²Ëµ¥ÏÔÊ¾µÄ×ÖÌå
-		jm4.setFont(new Font("TimesRoman", Font.BOLD, 15));// ÉèÖÃ²Ëµ¥ÏÔÊ¾µÄ×ÖÌå
+		jm1 = new Menu("æ¸¸æˆ");
+		jm2 = new Menu("æš‚åœ/ç»§ç»­");
+		jm3 = new Menu("å¸®åŠ©");
+		jm4 = new Menu("æ¸¸æˆçº§åˆ«");
+		jm1.setFont(new Font("TimesRoman", Font.BOLD, 15));// è®¾ç½®èœå•æ˜¾ç¤ºçš„å­—ä½“
+		jm2.setFont(new Font("TimesRoman", Font.BOLD, 15));// è®¾ç½®èœå•æ˜¾ç¤ºçš„å­—ä½“
+		jm3.setFont(new Font("TimesRoman", Font.BOLD, 15));// è®¾ç½®èœå•æ˜¾ç¤ºçš„å­—ä½“
+		jm4.setFont(new Font("TimesRoman", Font.BOLD, 15));// è®¾ç½®èœå•æ˜¾ç¤ºçš„å­—ä½“
 
-		jmi1 = new MenuItem("¿ªÊ¼ĞÂÓÎÏ·");
-		jmi2 = new MenuItem("ÍË³ö");
-		jmi3 = new MenuItem("ÔİÍ£");
-		jmi4 = new MenuItem("¼ÌĞø");
-		jmi5 = new MenuItem("ÓÎÏ·ËµÃ÷");
-		jmi6 = new MenuItem("¼¶±ğ1");
-		jmi7 = new MenuItem("¼¶±ğ2");
-		jmi8 = new MenuItem("¼¶±ğ3");
-		jmi9 = new MenuItem("¼¶±ğ4");
+		jmi1 = new MenuItem("å¼€å§‹æ–°æ¸¸æˆ");
+		jmi2 = new MenuItem("é€€å‡º");
+		jmi3 = new MenuItem("æš‚åœ");
+		jmi4 = new MenuItem("ç»§ç»­");
+		jmi5 = new MenuItem("æ¸¸æˆè¯´æ˜");
+		jmi6 = new MenuItem("çº§åˆ«1");
+		jmi7 = new MenuItem("çº§åˆ«2");
+		jmi8 = new MenuItem("çº§åˆ«3");
+		jmi9 = new MenuItem("çº§åˆ«4");
 		jmi1.setFont(new Font("TimesRoman", Font.BOLD, 15));
 		jmi2.setFont(new Font("TimesRoman", Font.BOLD, 15));
 		jmi3.setFont(new Font("TimesRoman", Font.BOLD, 15));
@@ -151,14 +151,14 @@ public class SnakeClient extends Frame implements ActionListener {
 		jmi9.addActionListener(this);
 		jmi9.setActionCommand("level4");
 
-		this.setMenuBar(jmb);// ²Ëµ¥Bar·Åµ½JFrameÉÏ
+		this.setMenuBar(jmb);// èœå•Baræ”¾åˆ°JFrameä¸Š
 		this.setVisible(true);
 
-		this.setSize(Fram_width, Fram_length); // ÉèÖÃ½çÃæ´óĞ¡
-		this.setLocation(280, 50); // ÉèÖÃ½çÃæ³öÏÖµÄÎ»ÖÃ
-		this.setTitle("Ì°³ÔÉßÅö·½¿é");
+		this.setSize(Fram_width, Fram_length); // è®¾ç½®ç•Œé¢å¤§å°
+		this.setLocation(280, 50); // è®¾ç½®ç•Œé¢å‡ºç°çš„ä½ç½®
+		this.setTitle("è´ªåƒè›‡ç¢°æ–¹å—");
 
-		this.addWindowListener(new WindowAdapter() { // ´°¿Ú¼àÌı¹Ø±Õ
+		this.addWindowListener(new WindowAdapter() { // çª—å£ç›‘å¬å…³é—­
 					public void windowClosing(WindowEvent e) {
 						System.exit(0);
 					}
@@ -171,11 +171,11 @@ public class SnakeClient extends Frame implements ActionListener {
 			bs.add(new barrier(100*i,50, rand.nextInt(10),this));
 		}
 
-		this.addKeyListener(new KeyMonitor());// ¼üÅÌ¼àÌı
-		new Thread(new PaintThread()).start(); // Ïß³ÌÆô¶¯
+		this.addKeyListener(new KeyMonitor());// é”®ç›˜ç›‘å¬
+		new Thread(new PaintThread()).start(); // çº¿ç¨‹å¯åŠ¨
 	}
 	
-	//Åö×²º¯Êı£¬Åö×²ºóÈÃÉßµÄ³¤¶ÈºÍ·½¿éµÄÊıÖµÍ¬Ê±¼õÉÙ£¬¼õµ½0µÄ»°¾Í½«ÓÃ»§µÄÉßµÄÉúÃüÖÃÎªfalse
+	//ç¢°æ’å‡½æ•°ï¼Œç¢°æ’åè®©è›‡çš„é•¿åº¦å’Œæ–¹å—çš„æ•°å€¼åŒæ—¶å‡å°‘ï¼Œå‡åˆ°0çš„è¯å°±å°†ç”¨æˆ·çš„è›‡çš„ç”Ÿå‘½ç½®ä¸ºfalse
 	public void hitBarrier(Graphics g,barrier b,Snake s){
 		for(int i = Math.min(b.num,s.len);i>0;i--){
 			b.num -= 1;
@@ -190,7 +190,7 @@ public class SnakeClient extends Frame implements ActionListener {
 		}
 	}
 	
-	//ÉèÖÃ¶àÏß³Ìº¯Êı£¬Ã¿¸ô50ºÁÃëË¢ĞÂ»­Í¼º¯Êı
+	//è®¾ç½®å¤šçº¿ç¨‹å‡½æ•°ï¼Œæ¯éš”50æ¯«ç§’åˆ·æ–°ç”»å›¾å‡½æ•°
 	private class PaintThread implements Runnable {
 		public void run() {
 			// TODO Auto-generated method stub
@@ -206,16 +206,16 @@ public class SnakeClient extends Frame implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
-		new SnakeClient(); // ÊµÀı»¯
+		new SnakeClient(); // å®ä¾‹åŒ–
 	}
 	
 	private class KeyMonitor extends KeyAdapter {
 
-		public void keyReleased(KeyEvent e) { // ¼àÌı¼üÅÌÊÍ·Å
+		public void keyReleased(KeyEvent e) { // ç›‘å¬é”®ç›˜é‡Šæ”¾
 			homeSnake.keyReleased(e);
 		}
 
-		public void keyPressed(KeyEvent e) { // ¼àÌı¼üÅÌ°´ÏÂ
+		public void keyPressed(KeyEvent e) { // ç›‘å¬é”®ç›˜æŒ‰ä¸‹
 			homeSnake.keyPressed(e);
 		}
 
@@ -226,8 +226,8 @@ public class SnakeClient extends Frame implements ActionListener {
 		if (e.getActionCommand().equals("NewGame")) {
 			time = 0;
 			printable = false;
-			Object[] options = { "È·¶¨", "È¡Ïû" };
-			int response = JOptionPane.showOptionDialog(this, "ÄúÈ·ÈÏÒª¿ªÊ¼ĞÂÓÎÏ·£¡", "",
+			Object[] options = { "ç¡®å®š", "å–æ¶ˆ" };
+			int response = JOptionPane.showOptionDialog(this, "æ‚¨ç¡®è®¤è¦å¼€å§‹æ–°æ¸¸æˆï¼", "",
 					JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE, null,
 					options, options[0]);
 			if (response == 0) {
@@ -237,7 +237,7 @@ public class SnakeClient extends Frame implements ActionListener {
 				new SnakeClient();
 			} else {
 				printable = true;
-				new Thread(new PaintThread()).start(); // Ïß³ÌÆô¶¯
+				new Thread(new PaintThread()).start(); // çº¿ç¨‹å¯åŠ¨
 			}
 
 		} else if (e.getActionCommand().endsWith("Stop")) {
@@ -253,31 +253,31 @@ public class SnakeClient extends Frame implements ActionListener {
 
 			if (!printable) {
 				printable = true;
-				new Thread(new PaintThread()).start(); // Ïß³ÌÆô¶¯
+				new Thread(new PaintThread()).start(); // çº¿ç¨‹å¯åŠ¨
 			}
-			// System.out.println("¼ÌĞø");
+			// System.out.println("ç»§ç»­");
 		} else if (e.getActionCommand().equals("Exit")) {
 			printable = false;
-			Object[] options = { "È·¶¨", "È¡Ïû" };
-			int response = JOptionPane.showOptionDialog(this, "ÄúÈ·ÈÏÒªÍË³öÂğ", "",
+			Object[] options = { "ç¡®å®š", "å–æ¶ˆ" };
+			int response = JOptionPane.showOptionDialog(this, "æ‚¨ç¡®è®¤è¦é€€å‡ºå—", "",
 					JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE, null,
 					options, options[0]);
 			if (response == 0) {
-				System.out.println("ÍË³ö");
+				System.out.println("é€€å‡º");
 				System.exit(0);
 			} else {
 				printable = true;
-				new Thread(new PaintThread()).start(); // Ïß³ÌÆô¶¯
+				new Thread(new PaintThread()).start(); // çº¿ç¨‹å¯åŠ¨
 
 			}
 
 		} else if (e.getActionCommand().equals("help")) {
 			printable = false;
-			JOptionPane.showMessageDialog(null, "ÓÃ¡ú ¡û ¡ü ¡ı¿ØÖÆ·½Ïò£¬F¼üÅÌ·¢Éä£¬RÖØĞÂ¿ªÊ¼£¡",
-					"ÌáÊ¾£¡", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "ç”¨â†’ â† â†‘ â†“æ§åˆ¶æ–¹å‘ï¼ŒFé”®ç›˜å‘å°„ï¼ŒRé‡æ–°å¼€å§‹ï¼",
+					"æç¤ºï¼", JOptionPane.INFORMATION_MESSAGE);
 			this.setVisible(true);
 			printable = true;
-			new Thread(new PaintThread()).start(); // Ïß³ÌÆô¶¯
+			new Thread(new PaintThread()).start(); // çº¿ç¨‹å¯åŠ¨
 		} /*else if (e.getActionCommand().equals("level1")) {
 			Tank.count = 12;
 			Tank.speedX = 6;
