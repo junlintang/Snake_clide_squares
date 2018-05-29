@@ -61,6 +61,7 @@ public class SnakeClient extends Frame implements ActionListener {
 				bs.get(i).draw(g);
 //				System.out.println(bs.get(i).x+"  "+bs.get(i).y);
 			}
+			//这个地方，注意bs是一个ArrayList,其中所有的元素将全部呈现在Frame上
 			int last = bs.size();
 			for(int i=0;i<last;i++){
 				barrier bi = bs.get(i);
