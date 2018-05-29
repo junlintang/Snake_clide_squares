@@ -5,41 +5,41 @@ import java.util.List;
 import java.awt.Graphics;
 
 public class Snake {
-	public static  int speedX = 10; // ¾²Ì¬È«¾Ö±äÁ¿ËÙ¶È---------¿ÉÒÔ×÷ÎªÀ©ÕÅÀ´ÉèÖÃ¼¶±ğ£¬ËÙ¶È¿ìµÄ»°±È½ÏÄÑ
+	public static  int speedX = 10; // é™æ€å…¨å±€å˜é‡é€Ÿåº¦---------å¯ä»¥ä½œä¸ºæ‰©å¼ æ¥è®¾ç½®çº§åˆ«ï¼Œé€Ÿåº¦å¿«çš„è¯æ¯”è¾ƒéš¾
 	public static int count = 0;
-	public static final int width = 35, length = 35; //ÉßÃ¿Ò»²¿·ÖµÄÈ«¾Ö´óĞ¡£¬¾ßÓĞ²»¿É¸Ä±äĞÔ
-	private Direction direction = Direction.STOP; // ³õÊ¼»¯×´Ì¬Îª¾²Ö¹
-//	private Direction Kdirection = Direction.U; // ³õÊ¼»¯·½ÏòÎªÏòÉÏ
+	public static final int width = 35, length = 35; //è›‡æ¯ä¸€éƒ¨åˆ†çš„å…¨å±€å¤§å°ï¼Œå…·æœ‰ä¸å¯æ”¹å˜æ€§
+	private Direction direction = Direction.STOP; // åˆå§‹åŒ–çŠ¶æ€ä¸ºé™æ­¢
+//	private Direction Kdirection = Direction.U; // åˆå§‹åŒ–æ–¹å‘ä¸ºå‘ä¸Š
 	SnakeClient sc;
 
 	private boolean good;
 	private int x, y;
 	private int oldX, oldY;
-	public boolean live = true; // ³õÊ¼»¯Îª»î×Å
-	public int len = 5; // ³õÊ¼ÉúÃüÖµ,Ì°³ÔÉßµÄ³¤¶ÈÎª5
+	public boolean live = true; // åˆå§‹åŒ–ä¸ºæ´»ç€
+	public int len = 5; // åˆå§‹ç”Ÿå‘½å€¼,è´ªåƒè›‡çš„é•¿åº¦ä¸º5
 //	private snakeBlock[] sBlock;
 	List<snakeBlock> sBlock = new ArrayList<snakeBlock>();
 
 	private static Random r = new Random();
-
+//      æ–¹å‘
 	private boolean bL = false, bU = false, bR = false, bD = false;
 	
 
-	public Snake(int x, int y) {// SnakeµÄ¹¹Ôìº¯Êı1
+	public Snake(int x, int y) {// Snakeçš„æ„é€ å‡½æ•°1
 		this.x = x;
 		this.y = y;
 		this.oldX = x;
 		this.oldY = y;
 	}
 
-	public Snake(int x, int y, Direction dir, SnakeClient sc) {// SnakeµÄ¹¹Ôìº¯Êı2
+	public Snake(int x, int y, Direction dir, SnakeClient sc) {// Snakeçš„æ„é€ å‡½æ•°2
 		this(x, y);
 		this.direction = dir;
 		this.sc = sc;
 		this.initiate();
 	}
 	
-	public void initiate(){           //³õÊ¼»¯
+	public void initiate(){           //åˆå§‹åŒ–
 		for(int i=0;i<len;i++){
 			sBlock.add(new snakeBlock(x,y+i*20,sc));
 //			System.out.println(sBlock.get(i).x+" "+sBlock.get(i).y);
@@ -49,7 +49,7 @@ public class Snake {
 	public void draw(Graphics g) {
 		g.drawString(String.valueOf(len), x+6, y);
 
-		move(g);   //µ÷ÓÃmoveº¯Êı
+		move(g);   //è°ƒç”¨moveå‡½æ•°
 	}
 
 	void move(Graphics g) {
@@ -57,7 +57,7 @@ public class Snake {
 		this.oldX = x;
 		this.oldY = y;
 
-		switch (direction) {  //Ñ¡ÔñÒÆ¶¯·½Ïò
+		switch (direction) {  //é€‰æ‹©ç§»åŠ¨æ–¹å‘
 		case L:
 			x -= speedX;
 			break;
@@ -70,14 +70,14 @@ public class Snake {
 
 		if (x < 0)
 			x = 0;
-		if (y < 40)      //·ÀÖ¹×ß³ö¹æ¶¨ÇøÓò
+		if (y < 40)      //é˜²æ­¢èµ°å‡ºè§„å®šåŒºåŸŸ
 			y = 40;
-		if (x + Snake.width > SnakeClient.Fram_width)  //³¬¹ıÇøÓòÔò»Ö¸´µ½±ß½ç
+		if (x + Snake.width > SnakeClient.Fram_width)  //è¶…è¿‡åŒºåŸŸåˆ™æ¢å¤åˆ°è¾¹ç•Œ
 			x = SnakeClient.Fram_width - Snake.width;
 		if (y + Snake.length > SnakeClient.Fram_length)
 			y = SnakeClient.Fram_length - Snake.length;
 		int tempx = x;
-		for(int i=0;i<len;i++){                //ºóÃæµÄsblockµÃµ½Ç°ÃæµÄsblockµÄºá×ø±ê£¬ÊµÏÖÁ¬ĞøÒÆ¶¯
+		for(int i=0;i<len;i++){                //åé¢çš„sblockå¾—åˆ°å‰é¢çš„sblockçš„æ¨ªåæ ‡ï¼Œå®ç°è¿ç»­ç§»åŠ¨
 			snakeBlock si = sBlock.get(i);
 			si.changexy(tempx);
 			tempx = si.oldx;
@@ -88,33 +88,33 @@ public class Snake {
 
 
 
-	public void keyPressed(KeyEvent e) {  //½ÓÊÜ¼üÅÌÊÂ¼ş
+	public void keyPressed(KeyEvent e) {  //æ¥å—é”®ç›˜äº‹ä»¶
 		int key = e.getKeyCode();
 		switch (key) {
-		case KeyEvent.VK_RIGHT: //¼àÌıÏòÓÒ¼ü
+		case KeyEvent.VK_RIGHT: //ç›‘å¬å‘å³é”®
 			bR = true;
 			break;
 			
-		case KeyEvent.VK_LEFT://¼àÌıÏò×ó¼ü
+		case KeyEvent.VK_LEFT://ç›‘å¬å‘å·¦é”®
 			bL = true;
 			break;
 		
 		}
-		decideDirection();//µ÷ÓÃº¯ÊıÈ·¶¨ÒÆ¶¯·½Ïò
+		decideDirection();//è°ƒç”¨å‡½æ•°ç¡®å®šç§»åŠ¨æ–¹å‘
 	}
 
 	void decideDirection() {
-		if (!bL && !bU && bR && !bD)  //ÏòÓÒÒÆ¶¯
+		if (!bL && !bU && bR && !bD)  //å‘å³ç§»åŠ¨
 			direction = Direction.R;
 
-		else if (bL && !bU && !bR && !bD)   //Ïò×óÒÆ
+		else if (bL && !bU && !bR && !bD)   //å‘å·¦ç§»
 			direction = Direction.L;
 
 		else if (!bL && !bU && !bR && !bD)
-			direction = Direction.STOP;  //Ã»ÓĞ°´¼ü£¬¾Í±£³Ö²»¶¯
+			direction = Direction.STOP;  //æ²¡æœ‰æŒ‰é”®ï¼Œå°±ä¿æŒä¸åŠ¨
 	}
 
-	public void keyReleased(KeyEvent e) {  //¼üÅÌÊÍ·Å¼àÌı
+	public void keyReleased(KeyEvent e) {  //é”®ç›˜é‡Šæ”¾ç›‘å¬
 		int key = e.getKeyCode();
 		switch (key) {
 			
@@ -128,7 +128,7 @@ public class Snake {
 			
 
 		}
-		decideDirection();  //ÊÍ·Å¼üÅÌºóÈ·¶¨ÒÆ¶¯·½Ïò
+		decideDirection();  //é‡Šæ”¾é”®ç›˜åç¡®å®šç§»åŠ¨æ–¹å‘
 	}
 
 
